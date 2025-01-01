@@ -19,7 +19,7 @@ export function HeroContent() {
         onClick={handleExploreClick}
         className="w-full sm:w-auto text-lg"
       >
-        Explore Opportunities
+        Explore Portfolio
       </Button>
     </div>
   );
