@@ -3,7 +3,7 @@ import { Container } from '../ui/Container';
 import { HeritageContent } from './HeritageContent';
 import { TeamSection } from './TeamSection';
 import { AnimatedText } from './AnimatedText';
-import { Image } from '../ui/Image';
+import { OptimizedImage } from '../ui/OptimizedImage';
 
 export default function Heritage() {
   return (
@@ -14,10 +14,11 @@ export default function Heritage() {
           <div className="order-1 lg:order-2">
             <div className="relative aspect-[4/5] bg-gray-800">
               <div className="absolute inset-0">
-                <Image 
+                <OptimizedImage 
                   src="https://i.ibb.co/48phtW6/u3727122339-Image-of-a-Norwegian-wild-bearded-man-standing-in-t-b36564c8-1c6a-4244-bc3c-26f99f716594.png"
                   alt="Nordic craftsman in winter landscape"
                   className="w-full h-full object-cover rounded-sm shadow-xl"
+                  priority={true} // Mark as priority for immediate loading
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 via-gray-900/20 to-transparent"></div>
