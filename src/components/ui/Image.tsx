@@ -4,29 +4,51 @@ interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
   alt: string;
   className?: string;
+  quality?: 'low' | 'medium' | 'high';
+  loading?: 'lazy' | 'eager';
 }
 
-export function Image({ src, alt, className = '', ...props }: ImageProps) {
+export function Image({ 
+  src, 
+  alt, 
+  className = '', 
+  quality = 'medium',
+  loading = 'lazy',
+  style,
+  ...props 
+}: ImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-  const [imgSrc, setImgSrc] = useState(src);
 
   useEffect(() => {
-    setImgSrc(src);
+    if (!src) {
+      setHasError(true);
+      setIsLoading(false);
+      return;
+    }
+
     setIsLoading(true);
     setHasError(false);
+
+    const imgElement = new window.Image();
+    imgElement.src = src;
+    
+    imgElement.onload = () => {
+      setIsLoading(false);
+      setHasError(false);
+    };
+    
+    imgElement.onerror = () => {
+      setIsLoading(false);
+      setHasError(true);
+      console.error(`Failed to load image: ${src}`);
+    };
+
+    return () => {
+      imgElement.onload = null;
+      imgElement.onerror = null;
+    };
   }, [src]);
-
-  const handleLoad = () => {
-    setIsLoading(false);
-    setHasError(false);
-  };
-
-  const handleError = () => {
-    setIsLoading(false);
-    setHasError(true);
-    console.error(`Failed to load image: ${imgSrc}`);
-  };
 
   if (hasError) {
     return (
@@ -42,11 +64,15 @@ export function Image({ src, alt, className = '', ...props }: ImageProps) {
         <div className="absolute inset-0 bg-gray-800 animate-pulse" />
       )}
       <img
-        src={imgSrc}
+        src={src}
         alt={alt}
         className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
-        onLoad={handleLoad}
-        onError={handleError}
+        style={{
+          ...style,
+          imageRendering: quality === 'high' ? 'crisp-edges' : 'auto',
+          WebkitFontSmoothing: 'antialiased',
+        }}
+        loading={loading}
         {...props}
       />
     </div>
