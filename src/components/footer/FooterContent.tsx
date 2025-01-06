@@ -7,7 +7,7 @@ export function FooterContent() {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       <FooterSection title="Nordic Legacy">
         <p className="text-gray-400">
-          Building Lasting Value Through Strategic Partnerships and Acquisitions in the Nordic Construction Sector
+          Building a legacy of innovation and excellence through strategic collaboration
         </p>
       </FooterSection>
       
