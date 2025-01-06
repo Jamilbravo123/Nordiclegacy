@@ -9,37 +9,51 @@ export default function Contact() {
           <div>
             <h2 className="text-4xl font-bold mb-8">Let's Build Together</h2>
             <p className="text-gray-400 mb-8">
-              Are you a construction or engineering firm owner looking to secure your company's future? We'd love to discuss potential opportunities.
+              We'd love to discuss potential opportunities.
             </p>
             <div className="space-y-6">
               <div className="flex items-center">
                 <Mail className="h-6 w-6 mr-4" />
-                <span>contact@nordicconstruction.com</span>
+                <span>contact@nordiclegacy.com</span>
               </div>
               <div className="flex items-center">
                 <Phone className="h-6 w-6 mr-4" />
-                <span>+46 (0) 8 123 456 789</span>
+                <span>+47 986 917 60</span>
               </div>
               <div className="flex items-center">
                 <MapPin className="h-6 w-6 mr-4" />
-                <span>Norrmalm, Stockholm, Sweden</span>
+                <span>Lørenveien 73a, Oslo, Norway</span>
               </div>
             </div>
           </div>
           <form className="space-y-6">
             <div>
               <label className="block text-sm font-medium mb-2">Name</label>
-              <input type="text" className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-sm focus:outline-none focus:border-white" />
+              <input
+                type="text"
+                className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-blue-500"
+                placeholder="Your name"
+              />
             </div>
             <div>
               <label className="block text-sm font-medium mb-2">Email</label>
-              <input type="email" className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-sm focus:outline-none focus:border-white" />
+              <input
+                type="email"
+                className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-blue-500"
+                placeholder="your@email.com"
+              />
             </div>
             <div>
               <label className="block text-sm font-medium mb-2">Message</label>
-              <textarea rows={4} className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-sm focus:outline-none focus:border-white"></textarea>
+              <textarea
+                className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-blue-500 h-32"
+                placeholder="Your message"
+              ></textarea>
             </div>
-            <button className="w-full bg-white text-gray-900 py-3 rounded-sm font-semibold hover:bg-gray-100 transition-colors">
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+            >
               Send Message
             </button>
           </form>
