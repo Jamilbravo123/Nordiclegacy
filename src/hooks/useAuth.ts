@@ -76,11 +76,16 @@ export function useAuth() {
     }
 
     try {
+      // Use localhost for development
+      const baseUrl = process.env.NODE_ENV === 'development' 
+        ? 'http://localhost:3000'
+        : 'https://nordiclegacy.io';
+
       const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          emailRedirectTo: `${baseUrl}/privilege`
         }
       });
 
@@ -106,11 +111,53 @@ export function useAuth() {
     }
   };
 
+  const resetPassword = async (email: string) => {
+    try {
+      // Use localhost for development
+      const baseUrl = process.env.NODE_ENV === 'development' 
+        ? 'http://localhost:3000'
+        : 'https://nordiclegacy.io';
+
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${baseUrl}/privilege/reset-password`
+      });
+
+      if (error) throw error;
+      
+      return {
+        message: 'Password reset instructions have been sent to your email. Please check your inbox and click the reset link.'
+      };
+    } catch (error) {
+      console.error('Password reset error:', error);
+      throw error;
+    }
+  };
+
+  const updatePassword = async (newPassword: string) => {
+    const passwordError = validatePassword(newPassword);
+    if (passwordError) {
+      throw new Error(passwordError);
+    }
+
+    try {
+      const { error } = await supabase.auth.updateUser({
+        password: newPassword
+      });
+
+      if (error) throw error;
+    } catch (error) {
+      console.error('Password update error:', error);
+      throw error;
+    }
+  };
+
   return {
     user,
     loading,
     signIn,
     signUp,
     signOut,
+    resetPassword,
+    updatePassword,
   };
 }

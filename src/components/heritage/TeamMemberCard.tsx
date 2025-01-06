@@ -2,7 +2,7 @@ import React from 'react';
 import { Image } from '../ui/Image';
 import type { TeamMember } from '../../types/team';
 
-export function TeamMemberCard({ name, position, image }: TeamMember) {
+export function TeamMemberCard({ name, position, image, objectPosition }: TeamMember) {
   return (
     <div className="text-center group">
       <div className="relative w-64 h-64 mx-auto mb-4 overflow-hidden rounded-lg bg-gray-800">
@@ -12,7 +12,7 @@ export function TeamMemberCard({ name, position, image }: TeamMember) {
           alt={name}
           className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
           style={{ 
-            objectPosition: '50% 25%',
+            objectPosition: objectPosition || '50% 25%',
             filter: 'contrast(1.05) brightness(1.05) saturate(1.1)',
             imageRendering: 'crisp-edges',
             WebkitFontSmoothing: 'antialiased'

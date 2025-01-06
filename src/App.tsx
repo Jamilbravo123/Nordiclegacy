@@ -16,6 +16,7 @@ import Footer from './components/footer/Footer';
 // Auth Components
 import PrivilegeLogin from './components/auth/PrivilegeLogin';
 import AdminLogin from './components/admin/auth/AdminLogin';
+import ResetPasswordPage from './components/auth/ResetPasswordPage';
 
 // Dashboard Components
 import MemberDashboard from './components/dashboard/MemberDashboard';
@@ -40,9 +41,13 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainLayout />} />
+          {/* Auth Routes - These should come before the main layout */}
+          <Route path="/privilege/reset-password" element={<ResetPasswordPage />} />
           <Route path="/privilege" element={<PrivilegeLogin />} />
           <Route path="/admin/login" element={<AdminLogin />} />
+          
+          {/* Main Layout Route */}
+          <Route path="/" element={<MainLayout />} />
           
           {/* Member Dashboard Routes */}
           <Route 
@@ -64,6 +69,7 @@ function App() {
             } 
           />
           
+          {/* Catch-all route - should be last */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>

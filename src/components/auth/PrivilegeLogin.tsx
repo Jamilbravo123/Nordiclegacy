@@ -3,13 +3,15 @@ import { Container } from '../ui/Container';
 import { LoginForm } from './LoginForm';
 import { LoginHeader } from './LoginHeader';
 import { SignupModal } from './SignupModal';
+import { PasswordResetModal } from './PasswordResetModal';
 import { VerificationNotification } from './VerificationNotification';
 import { useAuth } from '../../hooks/useAuth';
 import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 
 export default function PrivilegeLogin() {
   const [isLoading, setIsLoading] = useState(false);
-  const { signIn, user } = useAuth();
+  const [isResetting, setIsResetting] = useState(false);
+  const { signIn, resetPassword, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state as { verificationEmail?: string; showVerification?: boolean } | null;
@@ -32,6 +34,15 @@ export default function PrivilegeLogin() {
     }
   };
 
+  const handlePasswordReset = async (email: string) => {
+    setIsResetting(true);
+    try {
+      await resetPassword(email);
+    } finally {
+      setIsResetting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 py-16 sm:py-24">
       <Container className="max-w-md">
@@ -41,6 +52,7 @@ export default function PrivilegeLogin() {
         </div>
       </Container>
       <SignupModal />
+      <PasswordResetModal onSubmit={handlePasswordReset} isLoading={isResetting} />
       {state?.showVerification && state?.verificationEmail && (
         <VerificationNotification 
           email={state.verificationEmail}

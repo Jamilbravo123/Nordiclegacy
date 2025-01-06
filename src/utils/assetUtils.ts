@@ -13,9 +13,8 @@ export function getPublicAssetPath(path: string): string {
     return path;
   }
   
-  // Remove leading slash if present and ensure proper path structure
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  return `/${cleanPath}`;
+  // Ensure path starts with a slash
+  return path.startsWith('/') ? path : `/${path}`;
 }
 
 /**

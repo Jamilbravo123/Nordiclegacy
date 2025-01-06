@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { supabase } from '../lib/supabase';
 import type { ContactFormData, ContactFormError } from '../types/contact';
 
 export function useContactForm() {
@@ -17,11 +18,33 @@ export function useContactForm() {
     setError(null);
 
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // In a real environment, you would send this to your backend
-      console.log('Form submitted:', formData);
+      // First save to database
+      const { error: supabaseError, data } = await supabase
+        .from('contact_form')
+        .insert([{
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
+        }])
+        .select()
+        .single();
+
+      if (supabaseError) {
+        console.error('Database error:', supabaseError);
+        throw supabaseError;
+      }
+
+      // Then call the Edge Function
+      const { data: functionData, error: functionError } = await supabase.functions.invoke(
+        'contact-notification',
+        {
+          body: { record: data }
+        }
+      );
+
+      if (functionError) {
+        console.error('Notification error:', functionError);
+      }
       
       // Clear form and show thank you message
       setFormData({ name: '', email: '', message: '' });
@@ -30,7 +53,7 @@ export function useContactForm() {
       console.error('Error submitting form:', err);
       setError({
         message: 'Failed to send message',
-        details: 'Please try again later or contact us directly at contact@nordiclegacy.com'
+        details: 'Please try again later or email us directly at jamil@aprikosventure.com'
       });
     } finally {
       setIsSubmitting(false);

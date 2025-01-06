@@ -1,0 +1,66 @@
+Introduction
+You are an expert in TypeScript, React 18.3.1, Vite, TailwindCSS, React Router DOM, Zustand, Recharts, Lucide React, and Supabase. This document ensures that the code aligns with the provided tech stack and requirements. Follow these rules to maintain consistency, scalability, and performance throughout the NordicLegacy.io project.
+
+Key Principles
+Write concise, modular, and technical code that is readable and adheres to TypeScript conventions.
+Use functional programming and avoid class-based components.
+Break down code into small, focused modules with clear responsibilities.
+Use descriptive variable names (e.g., isLoading, hasError).
+Follow consistent file naming conventions using lowercase and dashes (e.g., components/auth-wizard).
+Favor named exports for all components.
+Use the Receive an Object, Return an Object (RORO) pattern for function arguments and returns.
+JavaScript/TypeScript Guidelines
+Use TypeScript for all code and prefer interfaces over types.
+Avoid enums; use objects or maps instead for better flexibility.
+Structure files as follows:
+Exported component
+Subcomponents
+Helpers
+Static content
+Types
+Write pure functions using the function keyword and avoid semicolons.
+Simplify single-line conditionals by omitting curly braces (e.g., if (condition) doSomething()).
+Error Handling and Validation
+Prioritize error handling and validate inputs early in all functions.
+Use Zod for form validation and schema definition.
+Implement error handling using early returns to reduce nesting.
+Provide clear and user-friendly error messages.
+For server-side validation, use Supabase's Row Level Security (RLS) and protected queries.
+React Guidelines
+Use React 18 functional components with TypeScript interfaces.
+Use Zustand for state management to ensure predictable state updates.
+Use React Router DOM for routing.
+Leverage TailwindCSS for responsive styling, following a mobile-first approach.
+Include Recharts for data visualization and Lucide React for iconography.
+Avoid overusing useEffect or setState; prefer React’s declarative patterns.
+Supabase Guidelines
+Use Supabase for authentication, database queries, and real-time subscriptions.
+Ensure that database operations respect Row Level Security (RLS).
+Keep sensitive credentials in environment variables and avoid committing them to version control.
+Use Supabase Edge Functions for server-side logic where applicable.
+File Organization and Naming Conventions
+Keep files small (under 200 lines) and focused on a single responsibility.
+Use lowercase-dash naming conventions for directories (e.g., components/member-dashboard).
+Place static content and TypeScript interfaces at the bottom of the file for readability.
+Extract reusable logic into helper or utility files.
+Performance and Optimization
+Use Vite for fast development builds and optimizations.
+Optimize images using lazy loading and WebP format for faster performance.
+Implement caching strategies and code splitting where necessary.
+Use TailwindCSS to ensure consistent and optimized styling.
+Minimize re-renders by structuring state updates carefully (e.g., using Zustand).
+Testing and Development Tools
+Use ESLint for linting and Prettier for formatting to maintain clean code.
+Test changes frequently to ensure stability and correctness.
+Document all functions and components with clear comments.
+Use Git for version control and commit meaningful changes incrementally.
+Protected Files and Environment Variables
+Migration files in supabase/migrations/ with prefixes (e.g., 0001 through 0046) are restricted and should not be modified without permission.
+The .env file is restricted and must be configured correctly with Supabase credentials, including:
+Supabase URL
+Supabase Anonymous Key
+Other service keys
+Collaboration
+Communicate assumptions and ask questions to avoid misaligned expectations.
+Write clear and concise documentation for APIs, components, and backend logic.
+Review code collaboratively to maintain quality and consistency.

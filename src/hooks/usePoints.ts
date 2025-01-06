@@ -14,6 +14,7 @@ export function usePoints() {
   const [points, setPoints] = useState(0);
   const [history, setHistory] = useState<PointsHistory[]>([]);
   const [expiringPoints, setExpiringPoints] = useState(0);
+  const [expiringDate, setExpiringDate] = useState<string>('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -43,10 +44,14 @@ export function usePoints() {
 
         // Calculate expiring points (points older than 11 months)
         const expirationDate = new Date();
-        expirationDate.setMonth(expirationDate.getMonth() - 11);
+        expirationDate.setMonth(expirationDate.getMonth() + 1); // Set to 1 month from now for demo
+        setExpiringDate(expirationDate.toISOString());
+        
+        const oldestPointsDate = new Date();
+        oldestPointsDate.setMonth(oldestPointsDate.getMonth() - 11);
         
         const expiringPointsTotal = (historyData || [])
-          .filter(item => new Date(item.created_at) <= expirationDate)
+          .filter(item => new Date(item.created_at) <= oldestPointsDate)
           .reduce((sum, item) => sum + item.points, 0);
 
         setExpiringPoints(expiringPointsTotal);
@@ -64,6 +69,7 @@ export function usePoints() {
     points,
     history,
     expiringPoints,
+    expiringDate,
     loading
   };
 }

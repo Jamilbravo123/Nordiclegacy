@@ -11,7 +11,7 @@ export function LoginForm({ onSubmit, isLoading }: LoginFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { openSignupModal } = useAuthStore();
+  const { openSignupModal, openResetPasswordModal } = useAuthStore();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,9 +60,13 @@ export function LoginForm({ onSubmit, isLoading }: LoginFormProps) {
           <input type="checkbox" className="mr-2" />
           Remember me
         </label>
-        <a href="#" className="text-gray-300 hover:text-white">
+        <button
+          type="button"
+          onClick={openResetPasswordModal}
+          className="text-gray-300 hover:text-white"
+        >
           Forgot password?
-        </a>
+        </button>
       </div>
       <Button
         type="submit"
