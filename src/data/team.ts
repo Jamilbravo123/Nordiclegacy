@@ -18,11 +18,5 @@ export const teamMembers: TeamMember[] = [
     position: 'Project Lead SOE',
     image: '/team/hannu-helminen.webp',
     objectPosition: '50% 10%'
-  },
-  {
-    name: 'Håkon Skiaker',
-    position: 'Project Lead Antek',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    objectPosition: '50% 25%'
   }
 ];
